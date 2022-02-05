@@ -1,0 +1,58 @@
+:root {
+    --primary: #ccdad1;
+    --secondary: #9caea9;
+    --tertiary: #788585;
+    --light-dark: #6f6866;
+    --dark: #38302e;
+    --border-radius: .3rem;
+  }
+  
+* {
+  box-sizing: border-box;
+}
+
+.form-weather {
+  display:flex;
+}
+
+header {
+  color: white;
+  text-align: center;
+  background-color: blue;
+  background-image: linear-gradient(45deg, #1258a8 0%, #0f0964 52%, #2b023b 90%);
+}
+  
+
+.weather {
+  display:flex;
+  flex-direction: column;
+}
+.card {
+  width: 40%;
+  padding-right: 2%;
+
+}
+
+.city-info {
+  display:flex;
+}
+
+.current {
+  border: solid;
+  border-color: #0f0964, #0f0964,#0f0964,#0f0964;
+  padding:2%;
+}
+
+.daily {
+  display: flex;
+  flex-direction: row;
+}
+
+.dailyWeather {
+  background-color: #0f0964;
+  color: white;
+  font-weight: bold;
+  padding:2%;
+  margin:4px;
+  width:25%;
+}
