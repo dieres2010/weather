@@ -22,6 +22,7 @@ var displayWeather = function(weather) {
   console.log(currentTemp,currentWind, currentHumid, currentUv,iconurl);
 
   $(".cityWeather").remove();
+  $(".currentWIcon").remove();
   $(".row-weather").remove();
   var cityh3= $("<h3>").addClass("cityWeather").text(cityname+" ("+todayDate+") ");
   var cityicon = $("<img src="+iconurl+" width='70' height='70'>").addClass("currentWIcon");
@@ -116,11 +117,12 @@ var getWeather = function(cityName) {
 
 var buttonClickHandler = function(event) {
 
-  city = event.target.getAttribute("text");
-  alert(city);  
-  if (city) {
-    getWeather(city);
   
+  city = event.target.textContent;
+    
+  if (city) {
+    alert("entro");
+    getWeather(city);
   }
 
 
