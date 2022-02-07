@@ -54,7 +54,7 @@ var displayWeather = function(weather) {
   var currentHumid = weather.current.humidity;
   var currentUv = weather.current.uvi;
   var iconcode = weather.current.weather[0].icon;
-  var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+  var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
 
   
   $(".cityWeather").remove();
@@ -85,7 +85,7 @@ var displayWeather = function(weather) {
     dailyWind = weather.daily[i].wind_speed;
     dailyHumid = weather.daily[i].humidity;
     iconcode = weather.daily[i].weather[0].icon;
-    iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+    iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
 
     if (i==1) {
       $(".dailyWeather").remove();
@@ -108,7 +108,7 @@ var displayWeather = function(weather) {
 var getWeather = function(cityName) {
 
   console.log(cityName)
-  var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q="+cityName+"&limit=1&appid=6d3a04658a097afe203f686c93219289" 
+  var apiUrl = "https://api.openweathermap.org/geo/1.0/direct?q="+cityName+"&limit=1&appid=6d3a04658a097afe203f686c93219289" 
 
   fetch(apiUrl).then(function(response) {
     // request was successful
@@ -158,23 +158,6 @@ $(".city-buttons").on("click", "button", function() {
   getWeather(cityname);
 
 });
-
-/*var buttonClickHandler = function(event) {
-
-  const cityBtnEl = document.querySelectorAll(".city-buttons button");
-  //console.log(cityBtnEl);
-
-  var cityName = cityBtnEl.outerText;
-
-
-  
-  if (cityName) {
-    alert("entro");
-    getWeather(cityName);
-  }
-
-
-}*/
 
 var checkCityBtn = function(cityName) {
 
