@@ -24,6 +24,9 @@ THEN I am again presented with current and future conditions for that city
 
 The following image shows the web application's appearance and functionality:
 
+![Mock-up](./assets/images/weather-dashboard.png)
+
+
 Application live URL:
 
 
