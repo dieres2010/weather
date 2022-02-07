@@ -3,15 +3,52 @@ var nameInputEl = document.querySelector("#cityname");
 var cityButtonsEl = document.querySelector(".city-buttons");
 var cityname = "";
 const m = moment();
+var countBtn = 0;
 
 // today's date 
 todayDate = (m.format('MM/DD/YYYY'));
+
+var city = [];
+
+
+var createCityBtn = function() {
+
+  var cityBtn= $("<button>").addClass("btn btn"+countBtn).text(cityname);
+
+  // append button to parent city-buttons
+  $(".city-buttons").append(cityBtn);
+
+  
+  city[countBtn] = cityname;
+  countBtn ++;
+  localStorage.setItem("cities", JSON.stringify(city));
+}
+
+var cities = JSON.parse(localStorage.getItem("cities"));
+
+// if nothing in localStorage, or tasks in localStorage from a diferent day
+//create a new object to track all task status arrays
+
+if (cities) {
+  // if cities in localStorage create city buttons
+  var i =0;
+  
+  // then loop over array to load tasks
+  $.each(cities, function() {
+          // asign values from local storage to task array
+          city[i] = cities[i];
+          cityname = city[i];
+          createCityBtn();
+          i++;
+      });
+
+  };
 
 
 var displayWeather = function(weather) {
 
   var j =0;
-  console.log(weather);
+  
   var currentTemp = weather.current.temp;
   var currentWind = weather.current.wind_speed;
   var currentHumid = weather.current.humidity;
@@ -19,8 +56,7 @@ var displayWeather = function(weather) {
   var iconcode = weather.current.weather[0].icon;
   var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
 
-  console.log(currentTemp,currentWind, currentHumid, currentUv,iconurl);
-
+  
   $(".cityWeather").remove();
   $(".currentWIcon").remove();
   $(".row-weather").remove();
@@ -55,7 +91,6 @@ var displayWeather = function(weather) {
       $(".dailyWeather").remove();
     };
 
-    console.log(currentTemp,currentWind, currentHumid, iconurl);
   
     cityh3= $("<div>").addClass("day"+i+" dailyWeather").text(moment().add(i, 'd').format("MM/DD/YYYY"));
     $(".daily").append(cityh3);
@@ -72,6 +107,7 @@ var displayWeather = function(weather) {
 
 var getWeather = function(cityName) {
 
+  console.log(cityName)
   var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q="+cityName+"&limit=1&appid=6d3a04658a097afe203f686c93219289" 
 
   fetch(apiUrl).then(function(response) {
@@ -97,7 +133,6 @@ var getWeather = function(cityName) {
 
                   if (data1.length === 0) {
                     // issueContainerEl.textContent = "This repo has no open issues!";
-                    console.log("This city hasnt been find!");
                      return;
                   } else 
                   {
@@ -115,33 +150,36 @@ var getWeather = function(cityName) {
  
 };
 
-var buttonClickHandler = function(event) {
+$(".city-buttons").on("click", "button", function() {
+  cityname = $(this)
+  .text()
+  .trim();
+  console.log(cityname);
+  getWeather(cityname);
+
+});
+
+/*var buttonClickHandler = function(event) {
+
+  const cityBtnEl = document.querySelectorAll(".city-buttons button");
+  //console.log(cityBtnEl);
+
+  var cityName = cityBtnEl.outerText;
+
 
   
-  city = event.target.textContent;
-    
-  if (city) {
+  if (cityName) {
     alert("entro");
-    getWeather(city);
+    getWeather(cityName);
   }
 
 
-}
-
-var createCityBtn = function() {
-
-  var cityBtn= $("<button>").addClass("btn").text(cityname);
-
-  // append button to parent city-buttons
-  $(".city-buttons").append(cityBtn);
-
-}
+}*/
 
 var checkCityBtn = function(cityName) {
 
   var existBtn = false;
   const cityBtnEl = document.querySelectorAll(".city-buttons button");
-  console.log(cityBtnEl);
 
   for (i=0; i < cityBtnEl.length; i++) {
     if (cityBtnEl[i].outerText == cityName) {
@@ -175,6 +213,6 @@ var formSubmitHandler = function(event) {
 
 
 cityFormEl.addEventListener("submit", formSubmitHandler);
-cityButtonsEl.addEventListener("click", buttonClickHandler);
+//cityButtonsEl.addEventListener("click", buttonClickHandler);
 
 
