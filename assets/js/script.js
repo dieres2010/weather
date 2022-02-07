@@ -108,7 +108,8 @@ var displayWeather = function(weather) {
 var getWeather = function(cityName) {
 
   console.log(cityName)
-  var apiUrl = "https://api.openweathermap.org/geo/1.0/direct?q="+cityName+"&limit=1&appid=6d3a04658a097afe203f686c93219289" 
+  var apiUrl = "https://maps.googleapis.com/maps/api/geocode/json?address="+cityName+"&key= AIzaSyD0QPafleexaIMmOJr_v6cFbZykHxgm1O8"
+ // var apiUrl = "https://api.openweathermap.org/geo/1.0/direct?q="+cityName+"&limit=1&appid=6d3a04658a097afe203f686c93219289" 
 
   fetch(apiUrl).then(function(response) {
     // request was successful
@@ -120,9 +121,13 @@ var getWeather = function(cityName) {
            // issueContainerEl.textContent = "This repo has no open issues!";
             return;
           } else {
+            console.log(data);
             var i =0;
-            var latitude = data[i].lat;
-            var longitude = data[i].lon;
+            var latitude = data.results[i].geometry.location.lat;
+            var longitude = data.results[i].geometry.location.lng;
+
+          //  var latitude = data[i].lat;
+          //  var longitude = data[i].lon;
 
             var apiUrl2 = "https://api.openweathermap.org/data/2.5/onecall?lat="+latitude+"&lon="+longitude+"&exclude=minutely,hourly,alerts&units=imperial&appid=6d3a04658a097afe203f686c93219289"
 
