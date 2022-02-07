@@ -20,14 +20,17 @@ THEN I am presented with a 5-day forecast that displays the date, an icon repres
 WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 
-##Mock-Up
+## Mock-Up
 
 The following image shows the web application's appearance and functionality:
 
 ![Mock-up](./assets/images/weather-dashboard.png)
 
 
-Application live URL:
+## Application live URL:
 
+https://dieres2010.github.io/weather/
 
-Application GitHub URL:
+## Application GitHub URL:
+
+https://github.com/dieres2010/weather.git
